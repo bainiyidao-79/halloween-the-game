@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Home } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { siteConfig, type NavGroup } from "@/config/site";
-import { AdSlot } from "@/components/AdSlot";
+import { AdFrame } from "@/components/AdFrame";
 
 function NavItem({ label, href }: { label: string; href: string }) {
   const pathname = usePathname();
@@ -59,8 +59,10 @@ export function Sidebar() {
           </Link>
         </div>
         {/* 侧边栏底部广告位（菜单栏下方；ads.sidebar 留空则不渲染） */}
-        <AdSlot
+        <AdFrame
           code={siteConfig.ads?.sidebar}
+          width={160}
+          height={600}
           label="Sidebar advertisement"
           className="mt-6"
         />
