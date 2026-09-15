@@ -1,0 +1,172 @@
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+).replace(/\/+$/, "");
+
+export type NavLink = { label: string; href: string };
+export type NavGroup = { title: string; children: NavLink[] };
+
+export type SiteConfig = {
+  name: string;
+  shortName: string;
+  description: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  /** Hero 区顶部小徽章文字（如 "WIKI GUIDE"），空串则不显示 */
+  eyebrow?: string;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+
+  // 官方链接
+  platformUrl?: string;
+  discordUrl?: string;
+  youtubeChannelUrl?: string;
+
+  // 顶部导航（Header 用的平铺链接；不填则取 nav 第一组前 4 项）
+  topNav?: NavLink[];
+
+  // 侧边栏目录树（按实际内容增减，不做死链接）
+  nav: NavGroup[];
+
+  // 首页 YouTube 视频（Workflow 建站时填入：官方频道代表作 > 播放量最高热门视频）
+  heroVideo?: {
+    youtubeId: string;
+    title?: string;
+    description?: string;
+  };
+
+  // 首页「Trending Now」：精选文章（不填则整块隐藏）
+  trending?: { label: string; href: string; description?: string }[];
+
+  // 首页「What is <Game>?」介绍区（不填则整块隐藏）
+  gameIntro?: {
+    title?: string;
+    paragraphs: string[];
+    facts?: { label: string; value: string }[];
+  };
+
+  // 底部 CTA 大横幅（光晕容器，不填则整块隐藏）
+  ctaBanner?: {
+    title: string;
+    description?: string;
+    buttonLabel: string;
+    buttonHref: string;
+  };
+
+  // 广告位（骨架预制）：填入广告代码（HTML/JS）即生效；留空则完全不渲染不占位
+  ads?: {
+    /** 侧边栏底部广告位（菜单栏下方） */
+    sidebar?: string;
+    /** 页面底部 banner 广告位（页脚上方，每页都有） */
+    footerBanner?: string;
+  };
+
+  // 可选：FAQ
+  faq?: { question: string; answer: string }[];
+};
+
+export const siteConfig: SiteConfig = {
+  name: "Halloween: The Game Wiki",
+  shortName: "Halloween: The Game",
+  description: "The fan wiki for Halloween: The Game by IllFonic — how the 1v4 works, Michael's story campaign, weapons tier list, characters, achievements and patch news.",
+  heroTitle: "Halloween: The Game Wiki",
+  heroSubtitle: "Guides, Story, Multiplayer & More",
+  eyebrow: "ASYMMETRIC HORROR WIKI",
+  primaryCtaLabel: "Start with the Beginner's Guide",
+  primaryCtaHref: "/getting-started/beginners-guide",
+
+  platformUrl: "https://store.steampowered.com/app/3219630/Halloween_The_Game/",
+  discordUrl: "https://discord.gg/halloweenthegame",
+  youtubeChannelUrl: "",
+
+  // ⚠️ 导航按实际内容增减，不做死链接（gen_nav 生成）
+topNav: [
+  { label: "What Is Halloween: The Game? IllFonic's Asymmetric Horror", href: "/intro/what-is-halloween-the-game" },
+  { label: "Halloween: The Game Platforms & Release Date", href: "/intro/platforms-and-release" },
+  { label: "Halloween: The Game Multiplayer & Crossplay — How 1v4 Works", href: "/intro/multiplayer-and-crossplay" },
+  { label: "Halloween: The Game Story — The Night He Came Home", href: "/intro/story-and-setting" },
+  { label: "Halloween: The Game Beginner's Guide — HUD, Perks & Escapes", href: "/getting-started/beginners-guide" },
+  { label: "Halloween: The Game Strategy — Win as Michael or Survive", href: "/guides/strategy-guide" },
+],
+nav: [
+  { title: "Game Overview", children: [
+    { label: "What Is Halloween: The Game? IllFonic's Asymmetric Horror", href: "/intro/what-is-halloween-the-game" },
+    { label: "Halloween: The Game Platforms & Release Date", href: "/intro/platforms-and-release" },
+    { label: "Halloween: The Game Multiplayer & Crossplay — How 1v4 Works", href: "/intro/multiplayer-and-crossplay" },
+    { label: "Halloween: The Game Story — The Night He Came Home", href: "/intro/story-and-setting" },
+    { label: "Halloween: The Game Wiki — Guides, Story, Multiplayer & More", href: "/intro/game-overview" },
+  ] },
+  { title: "Getting Started", children: [
+    { label: "Halloween: The Game Beginner's Guide — HUD, Perks & Escapes", href: "/getting-started/beginners-guide" },
+    { label: "Halloween: The Game Beginner FAQ — Lobby, Bloodthirst & Tips", href: "/getting-started/beginner-faq" },
+    { label: "Halloween: The Game Getting Started — Quick Start Guide", href: "/getting-started/getting-started" },
+  ] },
+  { title: "Guides", children: [
+    { label: "Halloween: The Game Strategy — Win as Michael or Survive", href: "/guides/strategy-guide" },
+  ] },
+  { title: "Achievements", children: [
+    { label: "Halloween: The Game Achievements — How Progression Works", href: "/achievements/achievements-hub" },
+    { label: "Halloween: The Game Achievement & Trophy List", href: "/achievements/achievements-list" },
+  ] },
+  { title: "Characters", children: [
+    { label: "Halloween: The Game Characters — Michael, Civilians & Roster", href: "/characters/characters" },
+    { label: "Michael Myers — The Shape", href: "/characters/michael-myers" },
+  ] },
+  { title: "FAQ", children: [
+    { label: "Halloween: The Game FAQ — Release, Platforms, PS4 & More", href: "/faq/faq" },
+  ] },
+  { title: "Items", children: [
+    { label: "Halloween: The Game Items — Escape Tools & Anti-Grab", href: "/items/items" },
+  ] },
+  { title: "News & Updates", children: [
+    { label: "Halloween: The Game News & Updates — Official Channels", href: "/news/news-and-updates" },
+    { label: "Halloween: The Game Patch Notes — 1.0.1 & Day-One Patch", href: "/news/patch-notes-and-roadmap" },
+  ] },
+  { title: "Weapons", children: [
+    { label: "Halloween: The Game Weapons — Best Weapons Tier List", href: "/weapons/weapons" },
+  ] },
+],
+trending: [
+  { label: "What Is Halloween: The Game? IllFonic's Asymmetric Horror", href: "/intro/what-is-halloween-the-game", description: "Halloween: The Game is IllFonic's 1978-Haddonfield horror: play Michael Myers in a 1v4 asymmetric hunt or the " },
+  { label: "Halloween: The Game Platforms & Release Date", href: "/intro/platforms-and-release", description: "When did Halloween: The Game come out, which platforms it's on, what editions exist, and whether there's a PS4" },
+  { label: "Halloween: The Game Multiplayer & Crossplay — How 1v4 Works", href: "/intro/multiplayer-and-crossplay", description: "How Halloween: The Game multiplayer works: 1 Michael vs 4 civilians, special targets, escape types, returning " },
+  { label: "Halloween: The Game Story — The Night He Came Home", href: "/intro/story-and-setting", description: "The full Halloween: The Game single-player story: Michael's escape from Smith's Grove on October 30, 1978, the" },
+  { label: "Halloween: The Game Beginner's Guide — HUD, Perks & Escapes", href: "/getting-started/beginners-guide", description: "Everything Halloween: The Game doesn't tell you: reading the HUD, stalking and bloodthirst tiers, the civilian" },
+],
+
+  // ⚠️ 官方频道视频（Official Multiplayer Overview Trailer）
+  heroVideo: {
+    youtubeId: "DvdFI-NTcGg",
+    title: "Halloween: The Game — Official Multiplayer Overview Trailer",
+  },
+
+  gameIntro: {
+    title: "What is Halloween: The Game?",
+    paragraphs: [
+      "Halloween: The Game is IllFonic's asymmetric horror game set directly after the 1978 film. On Halloween night in Haddonfield, one player stalks the town as Michael Myers while up to four others fight back as the Heroes of Haddonfield — arming themselves, protecting civilians and racing to escape.",
+      "A standalone single-player story, The Night He Came Home, lets you play Michael's side: a prologue plus five chapters covering his escape from Smith's Grove and the road home. This wiki collects guides for both sides, plus weapons, items, achievements and patch coverage.",
+    ],
+    facts: [
+      { label: "Developer", value: "IllFonic" },
+      { label: "Publishers", value: "IllFonic Publishing · Gun Interactive" },
+      { label: "Release", value: "September 8, 2026" },
+      { label: "Platforms", value: "PC, PS5, Xbox Series X|S" },
+      { label: "Modes", value: "1v4 asymmetric · Single-player story" },
+    ],
+  },
+
+  ads: {
+    sidebar: `<script>
+  atOptions = {
+    'key' : '6bc78c18b40ab521a997e6a246ae2fe5',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/6bc78c18b40ab521a997e6a246ae2fe5/invoke.js"></script>`,
+    footerBanner: "",
+  },
+
+  faq: [],
+}
