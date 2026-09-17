@@ -244,6 +244,7 @@ export const siteConfig: SiteConfig = {
   },
 
   ads: {
+    // 2026-09-17 广告四件套标准（单元代码存根目录 ads/*.txt；native 横版）
     sideRailLeft: `<script>
   atOptions = {
     'key' : '012099124e3e6efb2dc0bd6b05fdfa9e',
@@ -264,5 +265,17 @@ export const siteConfig: SiteConfig = {
   };
 </script>
 <script src="https://www.highrevenueformat.com/6bc78c18b40ab521a997e6a246ae2fe5/invoke.js"></script>`,
+    footerBanner: `<script>
+  atOptions = {
+    'key' : '367d7449c47c3591885b46b77883db37',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/367d7449c47c3591885b46b77883db37/invoke.js"></script>`,
+    articleInline: `<script async="async" data-cfasync="false" src="https://pl31351976.profitableratecpmnetwork.com/837dde837a134c2302d295348eaa9417/invoke.js"></script>
+<div id="container-837dde837a134c2302d295348eaa9417"></div>`,
   },
 };
